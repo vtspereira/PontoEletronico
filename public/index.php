@@ -1,11 +1,16 @@
 <?php
 
-require_once(dirname(__FILE__, 2) . '/src/config/database.php');
+require_once(dirname(__FILE__, 2) . '/src/config/config.php');
+require_once(dirname(__FILE__, 2) . '/src/models/User.php');
 
-$sql = 'select * from users';
-$result = Database::getResultFromQuery($sql);
+$user = new User(['name' => 'Vitor', 'email' => 'vitor@lindo.com.br']);
+// echo $user->getSelect();
 
-while($row = $result->fetch_assoc()){
-    print_r($row);
+print_r(User::get(['name' => 'Chaves'], 'id, name, email'));
+
+echo '<br>';
+
+foreach(User::get([], 'name') as $user){
+    echo $user->name;
     echo '<br>';
 }
